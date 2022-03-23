@@ -6,24 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class EleviReader extends AplicantReader{
+public class EleviReader extends AplicantReader {
+    EleviReader(String numeFisier) throws FileNotFoundException {
+        super(numeFisier);
+    }
+
     @Override
     public List<Aplicant> readAplicanti(String file) throws FileNotFoundException {
-        Scanner input2 = new Scanner(new File(file));
-        input2.useDelimiter(",|\n");
+        super.getScanner().useDelimiter(",|\n");
         List<Aplicant> elevi = new ArrayList<>();
 
-        while (input2.hasNext()) {
+        while (super.getScanner().hasNext()) {
             Elev elev = new Elev();
-            readAplicant(input2,elev);
-            int clasa = input2.nextInt();
-            String tutore = input2.next();
+            readAplicant(super.getScanner(), elev);
+            int clasa = super.getScanner().nextInt();
+            String tutore = super.getScanner().next();
             elev.setClasa(clasa);
             elev.setTutore(tutore);
             elevi.add(elev);
         }
-
-        input2.close();
+        super.getScanner().close();
         return elevi;
     }
 }

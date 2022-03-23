@@ -1,9 +1,20 @@
 package seminar2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public abstract class AplicantReader implements Reader{
-    public void readAplicant(Scanner scanner,Aplicant aplicant){
+public abstract class AplicantReader implements Reader {
+    private Scanner scanner;
+    AplicantReader(String numeFisier) throws FileNotFoundException {
+        scanner = new Scanner(new File(numeFisier));
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    public void readAplicant(Scanner scanner, Aplicant aplicant) {
         String nume = scanner.next();
         String prenume = scanner.next();
         int varsta = scanner.nextInt();
@@ -16,7 +27,7 @@ public abstract class AplicantReader implements Reader{
         aplicant.setPrenume(prenume);
         aplicant.setVarsta(varsta);
         aplicant.setPunctaj(punctaj);
-        aplicant.setDenumiriProiecte(nr,vect);
+        aplicant.setDenumiriProiecte(nr, vect);
     }
 
 }
